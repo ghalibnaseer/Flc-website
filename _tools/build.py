@@ -355,7 +355,7 @@ partners = "\n".join([
     person("Managing Partner", "Naseer Ahmad Thaheem", "Advocate Supreme Court of Pakistan", nat_bio, photo="img/team/naseer-ahmad-thaheem"),
     person("Senior Partner", "Mehr Zamir Hussain Sandhal", "Advocate Supreme Court of Pakistan", mzs_bio),
     person("Partner", "Ghalib Naseer", "Advocate",
-           "LLB (Hons), University of London. Barrister under training at the Honourable Society of the Middle Temple. Practises in criminal, family and corporate matters.",
+           "LLB (Hons), University of London. Practises in criminal, family and corporate matters.",
            photo="img/team/ghalib-naseer", more="ghalib-naseer.html"),
 ])
 associates = "\n".join([
@@ -587,7 +587,7 @@ profile_hero = """<p class="crumb wrap"><a href="team.html">Team</a> / Ghalib Na
     <div>
       <h1>Ghalib Naseer</h1>
       <p class="fullname">Malik Ghalib Naseer Thaheem</p>
-      <p class="calling">Lawyer and legal scholar working on constitutionalism, international law, jurisprudence and legal theory. Barrister under training at the Middle Temple.</p>
+      <p class="calling">Lawyer and legal scholar working on constitutionalism, international law, jurisprudence and legal theory.</p>
       <div class="firm">
         <img src="img/emblem-480.png" width="480" height="410" alt="">
         <div>
