@@ -24,7 +24,7 @@ OFFICES = [
 ]
 
 NAV = [
-    ("index.html", "The Firm"),
+    ("./", "The Firm"),
     ("practice.html", "Practice"),
     ("team.html", "Team"),
     ("contact.html", "Contact"),
@@ -58,7 +58,7 @@ def head(title, description, path):
 def topbar(current):
     links = []
     for href, label in NAV:
-        cur = ' aria-current="page"' if href == current else ""
+        cur = ' aria-current="page"' if href == current or (href == "./" and current == "index.html") else ""
         links.append(f'      <a href="{href}"{cur}>{label}</a>')
     links.append(f'      <a class="members" href="{MEMBERS_URL}" rel="nofollow">Members<span class="m-hide">’ area</span></a>')
     nav = "\n".join(links)
@@ -119,6 +119,8 @@ def footer():
 
 
 def page(path, title, description, body, extra_head="", scripts="", with_contact=True):
+    if path == "404.html":
+        extra_head = '<base href="/">\n<meta name="robots" content="noindex">\n' + extra_head
     html = head(title, description, path) + extra_head + "</head>\n" + topbar(path)
     html += '<main id="main">\n' + body + "\n</main>\n"
     if with_contact:
