@@ -33,7 +33,7 @@ NAV = [
 
 def head(title, description, path):
     full_title = "FLC &amp; Associates LLP" if path == "index.html" else f"{title} | FLC &amp; Associates LLP"
-    canonical = f"{SITE}/" if path == "index.html" else f"{SITE}/{path}"
+    canonical = f"{SITE}/" if path == "index.html" else f"{SITE}/{path[:-5] if path.endswith('.html') else path}"
     return f"""<!doctype html>
 <html lang="en-GB">
 <head>
@@ -47,6 +47,8 @@ def head(title, description, path):
 <meta property="og:title" content="{full_title}">
 <meta property="og:description" content="{description}">
 <meta property="og:url" content="{canonical}">
+<meta property="og:image" content="{SITE}/img/og-image.png">
+<meta name="twitter:card" content="summary">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="preload" href="fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -126,6 +128,9 @@ def page(path, title, description, body, extra_head="", scripts="", with_contact
     if with_contact:
         html += contact_band()
     html += footer() + scripts + "</body>\n</html>\n"
+    # Clean addresses: GitHub Pages serves /team for team.html, so link without the extension.
+    html = re.sub(r'href="(practice|team|ghalib-naseer|contact|legal-notice|privacy)\.html', r'href="\1', html)
+    html = html.replace('href="index.html"', 'href="./"').replace('href="index.html#', 'href="./#')
     (OUT / path).write_text(html, encoding="utf-8")
 
 
@@ -133,20 +138,41 @@ def page(path, title, description, body, extra_head="", scripts="", with_contact
 ORG_JSONLD = """<script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LegalService",
-  "@id": "https://flcassociates.com/#firm",
-  "name": "FLC & Associates LLP",
-  "url": "https://flcassociates.com/",
-  "logo": "https://flcassociates.com/img/emblem-480.png",
-  "email": "info@flcassociates.com",
-  "telephone": "+92-307-1114701",
-  "foundingDate": "1996",
-  "areaServed": "Pakistan",
-  "address": [
-    { "@type": "PostalAddress", "streetAddress": "Ali Street, New North Gulgasht Colony", "addressLocality": "Multan", "addressCountry": "PK" },
-    { "@type": "PostalAddress", "streetAddress": "4-Bashir Khan Block, District and Sessions Courts", "addressLocality": "Multan", "addressCountry": "PK" },
-    { "@type": "PostalAddress", "streetAddress": "3rd Floor, Al-Ghaffar Law Building, 7-Turner Road", "addressLocality": "Lahore", "addressCountry": "PK" },
-    { "@type": "PostalAddress", "streetAddress": "Hamza Plaza, Awan Market", "addressLocality": "Rawalpindi", "addressCountry": "PK" }
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://flcassociates.com/#website",
+      "url": "https://flcassociates.com/",
+      "name": "FLC & Associates LLP",
+      "alternateName": ["FLC and Associates LLP", "FLC & Associates", "FLC Associates"],
+      "publisher": { "@id": "https://flcassociates.com/#firm" }
+    },
+    {
+      "@type": "LegalService",
+      "@id": "https://flcassociates.com/#firm",
+      "name": "FLC & Associates LLP",
+      "alternateName": ["FLC and Associates LLP", "FLC & Associates", "FLC Associates"],
+      "description": "Law firm established in 1996, practising in criminal, corporate, family, civil and constitutional law before the courts and tribunals of Pakistan.",
+      "url": "https://flcassociates.com/",
+      "logo": "https://flcassociates.com/img/logo-full.png",
+      "image": "https://flcassociates.com/img/logo-full.png",
+      "email": "info@flcassociates.com",
+      "telephone": "+92-307-1114701",
+      "foundingDate": "1996",
+      "areaServed": "Pakistan",
+      "address": [
+        { "@type": "PostalAddress", "streetAddress": "Ali Street, New North Gulgasht Colony", "addressLocality": "Multan", "addressRegion": "Punjab", "addressCountry": "PK" },
+        { "@type": "PostalAddress", "streetAddress": "4-Bashir Khan Block, District and Sessions Courts", "addressLocality": "Multan", "addressRegion": "Punjab", "addressCountry": "PK" },
+        { "@type": "PostalAddress", "streetAddress": "3rd Floor, Al-Ghaffar Law Building, 7-Turner Road", "addressLocality": "Lahore", "addressRegion": "Punjab", "addressCountry": "PK" },
+        { "@type": "PostalAddress", "streetAddress": "Hamza Plaza, Awan Market", "addressLocality": "Rawalpindi", "addressRegion": "Punjab", "addressCountry": "PK" }
+      ],
+      "founder": { "@type": "Person", "name": "Naseer Ahmad Thaheem" },
+      "employee": [
+        { "@type": "Person", "name": "Naseer Ahmad Thaheem", "jobTitle": "Managing Partner" },
+        { "@type": "Person", "name": "Mehr Zamir Hussain Sandhal", "jobTitle": "Senior Partner" },
+        { "@type": "Person", "name": "Ghalib Naseer", "jobTitle": "Partner", "url": "https://flcassociates.com/ghalib-naseer", "sameAs": ["https://ghalibnaseer.github.io/", "https://www.wikidata.org/wiki/Q141632011", "https://orcid.org/0009-0005-2123-7191"] }
+      ]
+    }
   ]
 }
 </script>
@@ -610,7 +636,7 @@ page("ghalib-naseer.html", "Ghalib Naseer",
 
 # ---------------------------------------------------------------- robots, sitemap, 404, CNAME
 (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n")
-urls = ["", "practice.html", "team.html", "ghalib-naseer.html", "contact.html", "legal-notice.html", "privacy.html"]
+urls = ["", "practice", "team", "ghalib-naseer", "contact", "legal-notice", "privacy"]
 (OUT / "sitemap.xml").write_text(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + "".join(f"  <url><loc>{SITE}/{u}</loc><lastmod>{UPDATED_ISO}</lastmod></url>\n" for u in urls)

@@ -11,6 +11,8 @@
 <meta property="og:title" content="FLC &amp; Associates LLP">
 <meta property="og:description" content="FLC &amp; Associates LLP is a law firm established in 1996 with offices in Multan, Lahore and Rawalpindi, practising in criminal, corporate, family, civil and constitutional law before every court in Pakistan.">
 <meta property="og:url" content="https://flcassociates.com/">
+<meta property="og:image" content="https://flcassociates.com/img/og-image.png">
+<meta name="twitter:card" content="summary">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="preload" href="fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -19,20 +21,41 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LegalService",
-  "@id": "https://flcassociates.com/#firm",
-  "name": "FLC & Associates LLP",
-  "url": "https://flcassociates.com/",
-  "logo": "https://flcassociates.com/img/emblem-480.png",
-  "email": "info@flcassociates.com",
-  "telephone": "+92-307-1114701",
-  "foundingDate": "1996",
-  "areaServed": "Pakistan",
-  "address": [
-    { "@type": "PostalAddress", "streetAddress": "Ali Street, New North Gulgasht Colony", "addressLocality": "Multan", "addressCountry": "PK" },
-    { "@type": "PostalAddress", "streetAddress": "4-Bashir Khan Block, District and Sessions Courts", "addressLocality": "Multan", "addressCountry": "PK" },
-    { "@type": "PostalAddress", "streetAddress": "3rd Floor, Al-Ghaffar Law Building, 7-Turner Road", "addressLocality": "Lahore", "addressCountry": "PK" },
-    { "@type": "PostalAddress", "streetAddress": "Hamza Plaza, Awan Market", "addressLocality": "Rawalpindi", "addressCountry": "PK" }
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://flcassociates.com/#website",
+      "url": "https://flcassociates.com/",
+      "name": "FLC & Associates LLP",
+      "alternateName": ["FLC and Associates LLP", "FLC & Associates", "FLC Associates"],
+      "publisher": { "@id": "https://flcassociates.com/#firm" }
+    },
+    {
+      "@type": "LegalService",
+      "@id": "https://flcassociates.com/#firm",
+      "name": "FLC & Associates LLP",
+      "alternateName": ["FLC and Associates LLP", "FLC & Associates", "FLC Associates"],
+      "description": "Law firm established in 1996, practising in criminal, corporate, family, civil and constitutional law before the courts and tribunals of Pakistan.",
+      "url": "https://flcassociates.com/",
+      "logo": "https://flcassociates.com/img/logo-full.png",
+      "image": "https://flcassociates.com/img/logo-full.png",
+      "email": "info@flcassociates.com",
+      "telephone": "+92-307-1114701",
+      "foundingDate": "1996",
+      "areaServed": "Pakistan",
+      "address": [
+        { "@type": "PostalAddress", "streetAddress": "Ali Street, New North Gulgasht Colony", "addressLocality": "Multan", "addressRegion": "Punjab", "addressCountry": "PK" },
+        { "@type": "PostalAddress", "streetAddress": "4-Bashir Khan Block, District and Sessions Courts", "addressLocality": "Multan", "addressRegion": "Punjab", "addressCountry": "PK" },
+        { "@type": "PostalAddress", "streetAddress": "3rd Floor, Al-Ghaffar Law Building, 7-Turner Road", "addressLocality": "Lahore", "addressRegion": "Punjab", "addressCountry": "PK" },
+        { "@type": "PostalAddress", "streetAddress": "Hamza Plaza, Awan Market", "addressLocality": "Rawalpindi", "addressRegion": "Punjab", "addressCountry": "PK" }
+      ],
+      "founder": { "@type": "Person", "name": "Naseer Ahmad Thaheem" },
+      "employee": [
+        { "@type": "Person", "name": "Naseer Ahmad Thaheem", "jobTitle": "Managing Partner" },
+        { "@type": "Person", "name": "Mehr Zamir Hussain Sandhal", "jobTitle": "Senior Partner" },
+        { "@type": "Person", "name": "Ghalib Naseer", "jobTitle": "Partner", "url": "https://flcassociates.com/ghalib-naseer", "sameAs": ["https://ghalibnaseer.github.io/", "https://www.wikidata.org/wiki/Q141632011", "https://orcid.org/0009-0005-2123-7191"] }
+      ]
+    }
   ]
 }
 </script>
@@ -44,9 +67,9 @@
     <a class="brand" href="./"><img src="img/emblem-480.png" width="480" height="410" alt=""><span>FLC &amp; Associates LLP</span></a>
     <nav class="nav" aria-label="Site">
       <a href="./" aria-current="page">The Firm</a>
-      <a href="practice.html">Practice</a>
-      <a href="team.html">Team</a>
-      <a href="contact.html">Contact</a>
+      <a href="practice">Practice</a>
+      <a href="team">Team</a>
+      <a href="contact">Contact</a>
       <a class="members" href="https://caselawdatabase.flcassociates.com/" target="_blank" rel="nofollow noopener" title="Case Law Database (members only, opens in a new tab)"><span class="m-hide">Case Law </span>Database</a>
     </nav>
   </div>
@@ -64,8 +87,8 @@
         <p><b>LLP</b>Registered with the SECP</p>
       </div>
       <div class="actions">
-        <a class="btn btn-solid" href="practice.html">Practice areas</a>
-        <a class="btn" href="contact.html">Contact the firm</a>
+        <a class="btn btn-solid" href="practice">Practice areas</a>
+        <a class="btn" href="contact">Contact the firm</a>
       </div>
     </div>
     <img class="emblem" src="img/emblem-480.png" width="480" height="410" alt="FLC &amp; Associates LLP emblem: the figure of Justice within a laurel wreath">
@@ -79,7 +102,7 @@
       <p class="lead">FLC &amp; Associates LLP was established in 1996 and is a limited liability partnership registered with the Securities and Exchange Commission of Pakistan.</p>
       <p>The firm practises in all areas of law, with particular depth in criminal, corporate, family, civil and constitutional matters. It advises clients, conducts litigation before courts and tribunals throughout Pakistan, acts as in-house counsel for businesses and organisations, and has a dedicated mediation team.</p>
       <p>The firm appears before every judicial forum in the country, from the District and Sessions Courts to the High Courts, the Federal Constitutional Court and the Supreme Court of Pakistan.</p>
-      <div class="more"><a href="practice.html">Practice and services</a><a href="team.html">The team</a></div>
+      <div class="more"><a href="practice">Practice and services</a><a href="team">The team</a></div>
     </div>
   </div>
 </section>
@@ -96,7 +119,7 @@
         <li><h3>Constitutional Matters</h3><p>Constitutional petitions for the enforcement of fundamental rights and the review of public action.</p></li>
         <li><h3>All other areas</h3><p>The firm accepts instructions across the full range of practice areas.</p></li>
       </ul>
-      <div class="more"><a href="practice.html">More on each practice area</a></div>
+      <div class="more"><a href="practice">More on each practice area</a></div>
     </div>
   </div>
 </section>
@@ -136,7 +159,7 @@
         <div><dt>Head Office</dt><dd>Ali Street, New North Gulgasht Colony, Multan</dd></div>
       </dl>
       <div class="actions">
-        <a class="btn btn-solid" href="contact.html#form">Send an enquiry</a>
+        <a class="btn btn-solid" href="contact#form">Send an enquiry</a>
         <a class="btn" href="mailto:info@flcassociates.com">Write an email</a>
       </div>
     </div>
@@ -146,8 +169,8 @@
   <div class="wrap">
     <span>© 2026 FLC &amp; Associates LLP. All rights reserved.</span>
     <nav aria-label="Legal">
-      <a href="legal-notice.html">Legal notice</a>
-      <a href="privacy.html">Privacy notice</a>
+      <a href="legal-notice">Legal notice</a>
+      <a href="privacy">Privacy notice</a>
       <a href="https://caselawdatabase.flcassociates.com/" target="_blank" rel="nofollow noopener">Case Law Database (members)</a>
     </nav>
   </div>
