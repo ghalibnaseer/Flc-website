@@ -586,7 +586,7 @@ profile_hero = """<p class="crumb wrap"><a href="team.html">Team</a> / Ghalib Na
   <div class="wrap">
     <div>
       <h1>Ghalib Naseer</h1>
-      <p class="fullname">Malik Ghalib Naseer Thaheem</p>
+      <p class="fullname">Ghalib Naseer Thaheem</p>
       <p class="calling">Lawyer and legal scholar working on constitutionalism, international law, jurisprudence and legal theory.</p>
       <div class="firm">
         <img src="img/emblem-480.png" width="480" height="410" alt="">
