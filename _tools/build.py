@@ -60,7 +60,7 @@ def topbar(current):
     for href, label in NAV:
         cur = ' aria-current="page"' if href == current or (href == "./" and current == "index.html") else ""
         links.append(f'      <a href="{href}"{cur}>{label}</a>')
-    links.append(f'      <a class="members" href="{MEMBERS_URL}" rel="nofollow">Members<span class="m-hide">’ area</span></a>')
+    links.append(f'      <a class="members" href="{MEMBERS_URL}" target="_blank" rel="nofollow noopener" title="Case Law Database (members only, opens in a new tab)"><span class="m-hide">Case Law </span>Database</a>')
     nav = "\n".join(links)
     return f"""<body>
 <a class="skip" href="#main">Skip to content</a>
@@ -111,7 +111,7 @@ def footer():
     <nav aria-label="Legal">
       <a href="legal-notice.html">Legal notice</a>
       <a href="privacy.html">Privacy notice</a>
-      <a href="{MEMBERS_URL}" rel="nofollow">Members’ area</a>
+      <a href="{MEMBERS_URL}" target="_blank" rel="nofollow noopener">Case Law Database (members)</a>
     </nav>
   </div>
 </footer>
@@ -488,8 +488,8 @@ legal = f"""<section class="page-head" aria-labelledby="lh">
       <p>Nothing on this website is legal advice. You should not act, or refrain from acting, on the basis of anything on this website without taking advice on your particular circumstances.</p>
       <h3>No advocate and client relationship</h3>
       <p>Visiting this website, or contacting the firm through it, does not create an advocate and client relationship. That relationship begins only when the firm confirms in writing that it has accepted your instructions.</p>
-      <h3>Members’ area</h3>
-      <p>The members’ area is restricted to persons authorised by the firm. Any attempt to obtain access without authorisation is prohibited.</p>
+      <h3>Case Law Database</h3>
+      <p>The firm\u2019s case law database is restricted to persons authorised by the firm. Any attempt to obtain access without authorisation is prohibited.</p>
       <h3>Links</h3>
       <p>Links to other websites are provided for convenience. The firm is not responsible for the content of those websites.</p>
       <p class="note-small">Last updated <time datetime="{UPDATED_ISO}">{UPDATED}</time>.</p>
