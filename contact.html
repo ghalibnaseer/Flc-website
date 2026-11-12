@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact | FLC &amp; Associates LLP</title>
+<meta name="description" content="Contact FLC &amp; Associates LLP: offices in Multan, Lahore and Rawalpindi; email info@flcassociates.com.">
+<link rel="canonical" href="https://flcassociates.com/contact.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FLC &amp; Associates LLP">
+<meta property="og:title" content="Contact | FLC &amp; Associates LLP">
+<meta property="og:description" content="Contact FLC &amp; Associates LLP: offices in Multan, Lahore and Rawalpindi; email info@flcassociates.com.">
+<meta property="og:url" content="https://flcassociates.com/contact.html">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="preload" href="fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/libre-caslon-text-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="img/emblem-480.png" width="480" height="410" alt=""><span>FLC &amp; Associates LLP</span></a>
+    <nav class="nav" aria-label="Site">
+      <a href="index.html">The Firm</a>
+      <a href="practice.html">Practice</a>
+      <a href="team.html">Team</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+      <a class="members" href="https://caselawdatabase.flcassociates.com/" rel="nofollow">Members<span class="m-hide">’ area</span></a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-head" aria-labelledby="ch">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h1 id="ch">Contact the firm</h1>
+    <p class="sub">Write to <a href="mailto:info@flcassociates.com">info@flcassociates.com</a>, visit one of the offices, or use the form below.</p>
+  </div>
+</section>
+
+<section class="section first" id="form" aria-labelledby="form-h">
+  <div class="wrap">
+    <h2 id="form-h">Enquiry</h2>
+    <div>
+      <p class="form-warning">Please do not send confidential or sensitive details of your matter through this form. Sending a message does not create an advocate and client relationship with the firm. See the <a href="privacy.html">privacy notice</a> for how your details are used.</p>
+      <form class="form" id="enquiry" action="#" method="post" novalidate>
+        <div><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required maxlength="120"></div>
+        <div><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required maxlength="160"></div>
+        <div><label for="f-phone">Telephone <span style="font-weight:400">(optional)</span></label><input id="f-phone" name="phone" type="tel" autocomplete="tel" maxlength="40"></div>
+        <div><label for="f-area">Area of law</label>
+          <select id="f-area" name="area">
+            <option>Criminal Law</option><option>Corporate</option><option>Family Law</option>
+            <option>Civil Law</option><option>Constitutional Matters</option><option>Mediation</option>
+            <option>In-house counsel</option><option>Other</option>
+          </select></div>
+        <div class="full"><label for="f-msg">Message</label><textarea id="f-msg" name="message" required maxlength="3000" placeholder="A short description of what you need help with"></textarea></div>
+        <div class="hp" aria-hidden="true"><label for="f-web">Leave this field empty</label><input id="f-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <div class="full"><label class="check"><input type="checkbox" name="consent" required> I have read the privacy notice and agree that the firm may use these details to reply to my enquiry.</label></div>
+        <div class="full"><button class="btn btn-solid" type="submit">Send enquiry</button></div>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="offices" aria-labelledby="offices-h">
+  <div class="wrap">
+    <h2 id="offices-h">Offices</h2>
+    <div>
+      <ul class="offices">
+        <li><p class="where">Head Office, Multan</p><address>Ali Street, New North Gulgasht Colony, Multan</address></li>
+        <li><p class="where">Multan Courts</p><address>4-Bashir Khan Block, District and Sessions Courts, Multan</address></li>
+        <li><p class="where">Lahore</p><address>3rd Floor, Al-Ghaffar Law Building, 7-Turner Road, Lahore</address></li>
+        <li><p class="where">Rawalpindi</p><address>Hamza Plaza, Awan Market, Rawalpindi</address></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 FLC &amp; Associates LLP. All rights reserved.</span>
+    <nav aria-label="Legal">
+      <a href="legal-notice.html">Legal notice</a>
+      <a href="privacy.html">Privacy notice</a>
+      <a href="https://caselawdatabase.flcassociates.com/" rel="nofollow">Members’ area</a>
+    </nav>
+  </div>
+</footer>
+<script>
+/* Contact form. FORM_ENDPOINT is the Google Apps Script web app URL; until it is set,
+   the form opens the visitor's email program with the message filled in. */
+(function () {
+  var FORM_ENDPOINT = "";
+  var form = document.getElementById("enquiry");
+  var status = document.getElementById("form-status");
+  if (!form) return;
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (form.website.value) return;
+    if (!form.checkValidity()) { status.textContent = "Please complete the name, email and message fields and tick the box."; form.reportValidity(); return; }
+    var data = { name: form.name.value, email: form.email.value, phone: form.phone.value, area: form.area.value, message: form.message.value };
+    if (!FORM_ENDPOINT) {
+      var body = "Name: " + data.name + "\nEmail: " + data.email + "\nTelephone: " + data.phone + "\nArea: " + data.area + "\n\n" + data.message;
+      window.location.href = "mailto:info@flcassociates.com?subject=" + encodeURIComponent("Enquiry: " + data.area) + "&body=" + encodeURIComponent(body);
+      return;
+    }
+    status.textContent = "Sending\u2026";
+    fetch(FORM_ENDPOINT, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(data) })
+      .then(function () { form.reset(); status.textContent = "Thank you. Your enquiry has been sent and the firm will reply by email."; })
+      .catch(function () { status.textContent = "The message could not be sent. Please email info@flcassociates.com."; });
+  });
+})();
+</script>
+</body>
+</html>
