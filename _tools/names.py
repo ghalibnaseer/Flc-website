@@ -2,7 +2,7 @@
 # (urdu, english, designation, note)
 ASC, AHC, ADV = "Advocate Supreme Court", "Advocate High Court", "Advocate"
 NAMES = [
- ("جاوید ہاشمی","Javed Hashmi",ASC,""),
+ ("جاوید ہاشمی","(Late) Javed Hashmi, Co-Founder",ASC,""),
  ("نصیر احمد تھہیم","Naseer Ahmad Thaheem",ASC,"Managing Partner (profiled)"),
  ("مہر ضمیر حسین سندھل","Mehr Zamir Hussain Sandhal",AHC,"Senior Partner (profiled). Sheet says Advocate High Court; your document says Advocate Supreme Court"),
  ("میاں محمد اسماعیل تھہیم","Mian Muhammad Ismail Thaheem",ASC,""),

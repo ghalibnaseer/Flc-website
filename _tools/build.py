@@ -358,6 +358,10 @@ partners = "\n".join([
            "LLB (Hons), University of London. Practises in criminal, family and corporate matters.",
            photo="img/team/ghalib-naseer", more="ghalib-naseer.html"),
 ])
+regional = "\n".join([
+    person("Managing Partner, HS Legal LLP", "Hamza Saifullah", "Advocate", photo="img/team/hamza-saifullah"),
+    person("Co-Managing Partner, HS Legal LLP", "Faizan Ul Haq", "Advocate", photo="img/team/faizan-ul-haq"),
+])
 associates = "\n".join([
     person("Senior Associate, Civil Litigation", "Shoaib Ashraf", "Advocate High Court",
            "More than ten years of legal experience.", photo="img/team/shoaib-ashraf"),
@@ -388,6 +392,19 @@ team = f"""<section class="page-head" aria-labelledby="th">
     <ul class="team">
 {partners}
     </ul>
+  </div>
+</section>
+
+<section class="section" id="regional-partners" aria-labelledby="regional-h">
+  <div class="wrap">
+    <h2 id="regional-h">Our Regional Partners</h2>
+    <div class="regional">
+      <a class="firm-logo" href="https://hslegal.org" target="_blank" rel="noopener" aria-label="HS Legal LLP (opens in a new tab)"><img src="img/partners/hs-legal-logo.png" width="896" height="192" alt="HS Legal LLP logo"></a>
+      <h3 class="firm-name"><a href="https://hslegal.org" target="_blank" rel="noopener">HS Legal LLP</a></h3>
+      <ul class="team">
+{regional}
+      </ul>
+    </div>
   </div>
 </section>
 
