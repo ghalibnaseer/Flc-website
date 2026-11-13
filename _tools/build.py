@@ -353,7 +353,7 @@ if SHOW_FORMER_OFFICES:
 
 partners = "\n".join([
     person("Managing Partner", "Naseer Ahmad Thaheem", "Advocate Supreme Court of Pakistan", nat_bio, photo="img/team/naseer-ahmad-thaheem"),
-    person("Senior Partner", "Mehr Zamir Hussain Sandhal", "Advocate Supreme Court of Pakistan", mzs_bio),
+    person("Senior Partner", "Mehr Zamir Hussain Sandhal", "Advocate Supreme Court of Pakistan", mzs_bio, photo="img/team/mehr-zamir-hussain-sandhal"),
     person("Partner", "Ghalib Naseer", "Advocate",
            "LLB (Hons), University of London. Practises in criminal, family and corporate matters.",
            photo="img/team/ghalib-naseer", more="ghalib-naseer.html"),
