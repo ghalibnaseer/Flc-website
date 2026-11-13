@@ -363,10 +363,10 @@ regional = "\n".join([
     person("Co-Managing Partner, HS Legal LLP", "Faizan Ul Haq", "Advocate", photo="img/team/faizan-ul-haq"),
 ])
 associates = "\n".join([
-    person("Senior Associate, Civil Litigation", "Shoaib Ashraf", "Advocate High Court",
-           "More than ten years of legal experience.", photo="img/team/shoaib-ashraf"),
     person("Senior Associate, Criminal Litigation", "Shafqat Raza Thaheem", "Advocate High Court",
            "More than ten years of experience in litigation before the District Courts and the High Court.", photo="img/team/shafqat-raza-thaheem"),
+    person("Senior Associate, Civil Litigation", "Shoaib Ashraf", "Advocate High Court",
+           "More than ten years of legal experience.", photo="img/team/shoaib-ashraf"),
     person("Senior Associate, Tax and Corporate Compliance", "Naveed Sikander Bhatti", "Advocate High Court",
            "Leads the firm\u2019s tax and corporate compliance work.", photo="img/team/naveed-sikander-bhatti"),
 ])
@@ -395,19 +395,6 @@ team = f"""<section class="page-head" aria-labelledby="th">
   </div>
 </section>
 
-<section class="section" id="regional-partners" aria-labelledby="regional-h">
-  <div class="wrap">
-    <h2 id="regional-h">Our Regional Partners</h2>
-    <div class="regional">
-      <a class="firm-logo" href="https://hslegal.org" target="_blank" rel="noopener" aria-label="HS Legal LLP (opens in a new tab)"><img src="img/partners/hs-legal-logo.png" width="896" height="192" alt="HS Legal LLP logo"></a>
-      <h3 class="firm-name"><a href="https://hslegal.org" target="_blank" rel="noopener">HS Legal LLP</a></h3>
-      <ul class="team">
-{regional}
-      </ul>
-    </div>
-  </div>
-</section>
-
 <section class="section" id="associates" aria-labelledby="assoc-h">
   <div class="wrap">
     <h2 id="assoc-h">Senior Associates</h2>
@@ -432,6 +419,19 @@ team = f"""<section class="page-head" aria-labelledby="th">
       <h3 class="list-head">Advocates</h3>
       <ul class="names">
 {namelist(adv)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="regional-partners" aria-labelledby="regional-h">
+  <div class="wrap">
+    <h2 id="regional-h">Our Regional Partners</h2>
+    <div class="regional">
+      <a class="firm-logo" href="https://hslegal.org" target="_blank" rel="noopener" aria-label="HS Legal LLP (opens in a new tab)"><img src="img/partners/hs-legal-logo.png" width="896" height="192" alt="HS Legal LLP logo"></a>
+      <h3 class="firm-name"><a href="https://hslegal.org" target="_blank" rel="noopener">HS Legal LLP</a></h3>
+      <ul class="team">
+{regional}
       </ul>
     </div>
   </div>
