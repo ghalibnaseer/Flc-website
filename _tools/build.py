@@ -602,6 +602,7 @@ for f, sid in [("career.html", "appointments"), ("career.html", "advocacy"), ("c
 # The firm page omits some portfolio content (partner's instructions, 15 Nov 2026).
 # The personal portfolio keeps it. Each edit must match exactly once, so a change
 # in the portfolio wording stops the build instead of letting the content through.
+# Publications stay in full, including those in the TILS Law Review.
 FIRM_PROFILE_REPLACE = [
     # practice areas added to the opening paragraph
     ("Head of Moot Courts and Advocacy Initiatives at The Millennium Universal College (TMUC), Multan.</p>",
@@ -638,10 +639,6 @@ FIRM_PROFILE_REMOVE_LI = [
     "<strong>Certificate of Excellence in Reviewing,",
     "<strong>Awards of Appreciation,",
     "<strong>Certificates of Honour and Appreciation,",
-    "<h4>Sovereignty Beyond Earth in Equitable Space Resource Regimes</h4>",
-    "<h4>The Cost of Injustice:",
-    "<h4>Combating Discrimination, Violence and Harmful Practices against Intersex Persons</h4>",
-    "Submitted by the TILS Law Review Society",
 ]
 
 def _cut(html, marker, open_tag, close_tag):
@@ -664,7 +661,8 @@ def firm_profile(html):
         html = _cut(html, m, "<p", "</p>")
     for m in FIRM_PROFILE_REMOVE_LI:
         html = _cut(html, m, "<li>", "</li>")
-    if "TILS" in html or "Spark of Hope" in html or "Middle Temple" in html:
+    pubs = html.find('id="publications"')
+    if "TILS" in html[:pubs] or "Spark of Hope" in html or "Middle Temple" in html:
         raise SystemExit("firm profile edit: removed content still present")
     return html
 
