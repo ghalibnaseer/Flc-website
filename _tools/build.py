@@ -378,6 +378,11 @@ adv = [e for u, e, d, n in NAMES if d == ADV and e not in profiled]
 def namelist(items):
     return "\n".join(f"        <li>{x}</li>" for x in items)
 
+asc_block = (f"""      <h3 class="list-head">Advocates Supreme Court</h3>
+      <ul class="names">
+{namelist(asc)}
+      </ul>
+""" if asc else "")
 team = f"""<section class="page-head" aria-labelledby="th">
   <div class="wrap">
     <p class="eyebrow">Team</p>
@@ -408,11 +413,7 @@ team = f"""<section class="page-head" aria-labelledby="th">
   <div class="wrap">
     <h2 id="adv-h">Advocates</h2>
     <div>
-      <h3 class="list-head">Advocates Supreme Court</h3>
-      <ul class="names">
-{namelist(asc)}
-      </ul>
-      <h3 class="list-head">Advocates High Court</h3>
+{asc_block}      <h3 class="list-head">Advocates High Court</h3>
       <ul class="names">
 {namelist(ahc)}
       </ul>
