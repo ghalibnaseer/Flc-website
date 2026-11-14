@@ -62,7 +62,8 @@ def topbar(current):
     for href, label in NAV:
         cur = ' aria-current="page"' if href == current or (href == "./" and current == "index.html") else ""
         links.append(f'      <a href="{href}"{cur}>{label}</a>')
-    links.append(f'      <a class="members" href="{MEMBERS_URL}" target="_blank" rel="nofollow noopener" title="Case Law Database (members only, opens in a new tab)"><span class="m-hide">Case Law </span>Database</a>')
+    cur = ' aria-current="page"' if current == "case-law-database.html" else ""
+    links.append(f'      <a class="members" href="case-law-database.html"{cur}><span class="m-hide">Case Law </span>Database</a>')
     nav = "\n".join(links)
     return f"""<body>
 <a class="skip" href="#main">Skip to content</a>
@@ -113,7 +114,7 @@ def footer():
     <nav aria-label="Legal">
       <a href="legal-notice.html">Legal notice</a>
       <a href="privacy.html">Privacy notice</a>
-      <a href="{MEMBERS_URL}" target="_blank" rel="nofollow noopener">Case Law Database (members)</a>
+      <a href="case-law-database.html">Case Law Database (members)</a>
     </nav>
   </div>
 </footer>
@@ -123,13 +124,15 @@ def footer():
 def page(path, title, description, body, extra_head="", scripts="", with_contact=True):
     if path == "404.html":
         extra_head = '<base href="/">\n<meta name="robots" content="noindex">\n' + extra_head
+    if path == "case-law-database.html":
+        extra_head = '<meta name="robots" content="noindex, nofollow">\n' + extra_head
     html = head(title, description, path) + extra_head + "</head>\n" + topbar(path)
     html += '<main id="main">\n' + body + "\n</main>\n"
     if with_contact:
         html += contact_band()
     html += footer() + scripts + "</body>\n</html>\n"
     # Clean addresses: GitHub Pages serves /team for team.html, so link without the extension.
-    html = re.sub(r'href="(practice|team|ghalib-naseer|contact|legal-notice|privacy)\.html', r'href="\1', html)
+    html = re.sub(r'href="(practice|team|ghalib-naseer|contact|legal-notice|privacy|case-law-database)\.html', r'href="\1', html)
     html = html.replace('href="index.html"', 'href="./"').replace('href="index.html#', 'href="./#')
     (OUT / path).write_text(html, encoding="utf-8")
 
@@ -542,6 +545,39 @@ legal = f"""<section class="page-head" aria-labelledby="lh">
 </section>
 """
 page("legal-notice.html", "Legal notice", "Legal notice, copyright and terms of use for the FLC &amp; Associates LLP website.", legal, with_contact=False)
+
+# ---------------------------------------------------------------- Case Law Database (information page)
+# Kept out of search results (noindex, not in the sitemap) on the partner's instructions, 15 Nov 2026.
+# The login button opens the database, which keeps its own password gate.
+database = f"""<section class="page-head db-head" aria-labelledby="dbh">
+  <div class="wrap">
+    <img class="db-emblem" src="img/emblem-480.png" width="480" height="410" alt="FLC &amp; Associates LLP emblem">
+    <div>
+      <p class="eyebrow">Members</p>
+      <h1 id="dbh">Case Law Database</h1>
+      <p class="sub">A private research resource of FLC &amp; Associates LLP.</p>
+    </div>
+  </div>
+</section>
+<section class="section first" aria-labelledby="db-about">
+  <div class="wrap">
+    <h2 id="db-about">About the database</h2>
+    <div class="prose">
+      <p>The Case Law Database is a research aid compiled by FLC &amp; Associates LLP. It collects the firm\u2019s notes on reported judgments, arranged by subject, provision and court, so that the firm\u2019s advocates can find relevant authority quickly. The summaries are the firm\u2019s own notes and are not the text of the judgments. The database is not legal advice. Before relying on any authority, read the full judgment in the official report and confirm that it remains good law.</p>
+      <p>The database, its arrangement and its summaries are the intellectual property of FLC &amp; Associates LLP. No part of it may be reproduced or republished without the firm\u2019s written permission.</p>
+      <p>Access is limited to members of the firm. A member who needs access should email <a href="mailto:{EMAIL}?subject=Case%20Law%20Database%20access%20request">{EMAIL}</a>. Login details must not be passed on outside the firm.</p>
+      <p class="signoff">Regards,<br><span class="signoff-name">Ghalib Naseer Thaheem</span><br>Partner, FLC &amp; Associates LLP.</p>
+      <div class="db-login">
+        <a class="btn btn-solid" href="{MEMBERS_URL}" target="_blank" rel="nofollow noopener">Log In to the Database</a>
+        <p class="note-small">You will be asked for the username and password provided by the firm. The database opens in a new tab.</p>
+      </div>
+    </div>
+  </div>
+</section>
+"""
+page("case-law-database.html", "Case Law Database",
+     "The case law database of FLC &amp; Associates LLP, a private research resource for members of the firm.",
+     database, with_contact=False)
 
 # ---------------------------------------------------------------- Privacy
 privacy = f"""<section class="page-head" aria-labelledby="prh">

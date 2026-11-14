@@ -237,6 +237,14 @@ footer.site a:hover { color: #E3BE84; }
   .section[id] { scroll-margin-top: 7rem; }
   .contact dl > div { grid-template-columns: minmax(0, 1fr); }
 }
+/* Case Law Database information page */
+.db-head .wrap { display: flex; align-items: center; gap: clamp(1.25rem, 4vw, 2.5rem); }
+.db-emblem { width: clamp(4.5rem, 12vw, 7.5rem); flex-shrink: 0; }
+.signoff { margin-top: 2rem !important; line-height: 1.6; }
+.signoff-name { font-family: var(--display); font-size: 1.35rem; }
+.db-login { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--rule); max-width: 40rem; }
+.db-login .note-small { margin-top: 0.9rem; }
+
 @media print {
   .topbar, .actions, .nav { display: none; }
   .contact, footer.site { background: #fff; color: #000; }
