@@ -364,7 +364,7 @@ regional = "\n".join([
 ])
 associates = "\n".join([
     person("Senior Associate, Criminal Litigation", "Shafqat Raza Thaheem", "Advocate High Court",
-           "More than ten years of experience in litigation before the District Courts and the High Court.", photo="img/team/shafqat-raza-thaheem"),
+           "Thirteen years of legal practice, with litigation before the District Courts and the High Court.", photo="img/team/shafqat-raza-thaheem"),
     person("Senior Associate, Civil Litigation", "Shoaib Ashraf", "Advocate High Court",
            "More than ten years of legal experience.", photo="img/team/shoaib-ashraf"),
     person("Senior Associate, Tax and Corporate Compliance", "Naveed Sikander Bhatti", "Advocate High Court",
