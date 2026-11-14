@@ -17,19 +17,22 @@
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="preload" href="fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/libre-caslon-text-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="site.css?v=f6a0d8cd11">
+<link rel="stylesheet" href="site.css?v=196519d273">
+<script>document.documentElement.className = "js";</script>
+<script src="site.js?v=a1a21b194a" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="topbar">
   <div class="wrap">
-    <a class="brand" href="./"><img src="img/emblem-480.png" width="480" height="410" alt=""><span>FLC &amp; Associates LLP</span></a>
-    <nav class="nav" aria-label="Site">
+    <a class="brand" href="./"><img src="img/emblem-160.png" width="160" height="137" alt=""><span>FLC &amp; Associates LLP</span></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span></button>
+    <nav class="nav" id="site-nav" aria-label="Site">
       <a href="./">The Firm</a>
       <a href="practice" aria-current="page">Practice</a>
       <a href="team">Team</a>
       <a href="contact">Contact</a>
-      <a class="members" href="case-law-database"><span class="m-hide">Case Law </span>Database</a>
+      <a class="members" href="case-law-database">Case Law Database</a>
     </nav>
   </div>
 </header>
@@ -47,12 +50,12 @@
     <h2 id="areas-h">Specialisms</h2>
     <div>
       <ul class="practice">
-        <li><h3>Criminal Law</h3><p>Pre-arrest and post-arrest bail, trials, appeals and revisions, quashment proceedings and private complaints, for complainants and for accused persons, at every stage from the trial court to the Supreme Court of Pakistan.</p></li>
-        <li><h3>Corporate</h3><p>Incorporation of companies and limited liability partnerships, corporate and regulatory compliance and filings with the Securities and Exchange Commission of Pakistan, drafting and review of commercial contracts, and corporate and commercial disputes.</p></li>
-        <li><h3>Family Law</h3><p>Dissolution of marriage, dower and maintenance, recovery of dowry articles, and custody and guardianship of minors, before the Family Courts and in appeal and constitutional proceedings.</p></li>
-        <li><h3>Civil Law</h3><p>Suits for declaration, possession, specific performance and recovery, property and rent matters, temporary and permanent injunctions, and the execution of decrees.</p></li>
-        <li><h3>Constitutional Matters</h3><p>Constitutional petitions for the enforcement of fundamental rights and against unlawful action by public bodies, and related appeals, before the High Courts and the Federal Constitutional Court.</p></li>
-        <li><h3>All other areas</h3><p>Matters outside the specialist fields, including tax, service and banking matters, are handled by the firm or with counsel it instructs.</p></li>
+        <li id="criminal-law"><h3>Criminal Law</h3><p>Pre-arrest and post-arrest bail, trials, appeals and revisions, quashment proceedings and private complaints, for complainants and for accused persons, at every stage from the trial court to the Supreme Court of Pakistan.</p></li>
+        <li id="corporate"><h3>Corporate</h3><p>Incorporation of companies and limited liability partnerships, corporate and regulatory compliance and filings with the Securities and Exchange Commission of Pakistan, drafting and review of commercial contracts, and corporate and commercial disputes.</p></li>
+        <li id="family-law"><h3>Family Law</h3><p>Dissolution of marriage, dower and maintenance, recovery of dowry articles, and custody and guardianship of minors, before the Family Courts and in appeal and constitutional proceedings.</p></li>
+        <li id="civil-law"><h3>Civil Law</h3><p>Suits for declaration, possession, specific performance and recovery, property and rent matters, temporary and permanent injunctions, and the execution of decrees.</p></li>
+        <li id="constitutional-matters"><h3>Constitutional Matters</h3><p>Constitutional petitions for the enforcement of fundamental rights and against unlawful action by public bodies, and related appeals, before the High Courts and the Federal Constitutional Court.</p></li>
+        <li id="other-areas"><h3>All other areas</h3><p>Matters outside the specialist fields, including tax, service and banking matters, are handled by the firm or with counsel it instructs.</p></li>
       </ul>
     </div>
   </div>
@@ -110,13 +113,38 @@
   </div>
 </section>
 <footer class="site">
-  <div class="wrap">
-    <span>© 2026 FLC &amp; Associates LLP. All rights reserved.</span>
-    <nav aria-label="Legal">
-      <a href="legal-notice">Legal notice</a>
-      <a href="privacy">Privacy notice</a>
-      <a href="case-law-database">Case Law Database (members)</a>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <a class="foot-logo" href="./"><img src="img/emblem-light-160.png" width="160" height="137" alt="" loading="lazy"><span>FLC &amp; Associates LLP</span></a>
+      <p class="foot-tag">Barristers, Lawyers &amp; Consultants</p>
+      <p class="foot-contact"><a href="mailto:info@flcassociates.com">info@flcassociates.com</a><br><a href="tel:+923071114701">+92 307 1114701</a></p>
+    </div>
+    <div class="foot-offices">
+      <p class="foot-h">Offices</p>
+      <ul>
+        <li><span>Head Office, Multan</span>Ali Street, New North Gulgasht Colony, Multan</li>
+        <li><span>Multan Courts</span>4-Bashir Khan Block, District and Sessions Courts, Multan</li>
+        <li><span>Lahore</span>3rd Floor, Al-Ghaffar Law Building, 7-Turner Road, Lahore</li>
+        <li><span>Rawalpindi</span>Hamza Plaza, Awan Market, Rawalpindi</li>
+      </ul>
+    </div>
+    <nav class="foot-links" aria-label="Footer">
+      <p class="foot-h">The firm</p>
+      <a href="./">The Firm</a>
+      <a href="practice">Practice</a>
+      <a href="team">Team</a>
+      <a href="contact">Contact</a>
     </nav>
+  </div>
+  <div class="foot-base">
+    <div class="wrap">
+      <span>© 2026 FLC &amp; Associates LLP. All rights reserved.</span>
+      <nav aria-label="Legal">
+        <a href="legal-notice">Legal notice</a>
+        <a href="privacy">Privacy notice</a>
+        <a href="case-law-database">Case Law Database (members)</a>
+      </nav>
+    </div>
   </div>
 </footer>
 </body>

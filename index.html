@@ -17,7 +17,9 @@
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="preload" href="fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/libre-caslon-text-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="site.css?v=f6a0d8cd11">
+<link rel="stylesheet" href="site.css?v=196519d273">
+<script>document.documentElement.className = "js";</script>
+<script src="site.js?v=a1a21b194a" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -64,34 +66,37 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="topbar">
   <div class="wrap">
-    <a class="brand" href="./"><img src="img/emblem-480.png" width="480" height="410" alt=""><span>FLC &amp; Associates LLP</span></a>
-    <nav class="nav" aria-label="Site">
+    <a class="brand" href="./"><img src="img/emblem-160.png" width="160" height="137" alt=""><span>FLC &amp; Associates LLP</span></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span></button>
+    <nav class="nav" id="site-nav" aria-label="Site">
       <a href="./" aria-current="page">The Firm</a>
       <a href="practice">Practice</a>
       <a href="team">Team</a>
       <a href="contact">Contact</a>
-      <a class="members" href="case-law-database"><span class="m-hide">Case Law </span>Database</a>
+      <a class="members" href="case-law-database">Case Law Database</a>
     </nav>
   </div>
 </header>
 <main id="main">
 <section class="firm-hero" aria-label="Introduction">
   <div class="wrap">
-    <div>
-      <p class="eyebrow">Barristers, Lawyers &amp; Consultants</p>
-      <h1>FLC &amp; Associates LLP</h1>
-      <p class="lede">A law firm practising across Pakistan since 1996, with offices in Multan, Lahore and Rawalpindi.</p>
-      <div class="facts">
-        <p><b>1996</b>Established</p>
-        <p><b>4</b>Offices in three cities</p>
-        <p><b>30,000+</b>Cases handled</p>
-      </div>
-      <div class="actions">
-        <a class="btn btn-solid" href="practice">Practice areas</a>
-        <a class="btn" href="contact">Contact the firm</a>
-      </div>
+    <img class="hero-mark" src="img/emblem-480.png" width="480" height="410" alt="" aria-hidden="true">
+    <p class="eyebrow">Barristers, Lawyers &amp; Consultants</p>
+    <h1>FLC &amp; Associates LLP</h1>
+    <p class="lede">A law firm practising across Pakistan since 1996, with offices in Multan, Lahore and Rawalpindi.</p>
+    <div class="actions">
+      <a class="btn btn-solid" href="practice">Practice areas</a>
+      <a class="btn" href="contact">Contact the firm</a>
     </div>
-    <img class="emblem" src="img/emblem-480.png" width="480" height="410" alt="FLC &amp; Associates LLP emblem: the figure of Justice within a laurel wreath">
+  </div>
+</section>
+
+<section class="figures" aria-label="The firm in figures">
+  <div class="wrap">
+    <p><b>1996</b>Established</p>
+    <p><b>4</b>Offices in three cities</p>
+    <p><b>30,000+</b>Cases handled</p>
+    <p><b>40+</b>Cities with associated advocates</p>
   </div>
 </section>
 
@@ -102,25 +107,38 @@
       <p class="lead">FLC &amp; Associates LLP was established in 1996 and has handled more than 30,000 cases over three decades. It practises from four offices in Multan, Lahore and Rawalpindi, and through associated advocates in more than 40 cities across Pakistan.</p>
       <p>The firm practises in all areas of law, with particular depth in criminal, corporate, family, civil and constitutional matters. It advises clients, conducts litigation before courts and tribunals throughout Pakistan, acts as in-house counsel for businesses and organisations, and has a dedicated mediation team.</p>
       <p>The firm appears before every judicial forum in the country, from the District and Sessions Courts to the High Courts, the Federal Constitutional Court and the Supreme Court of Pakistan.</p>
-      <div class="more"><a href="practice">Practice and services</a><a href="team">The team</a></div>
     </div>
   </div>
 </section>
 
-<section class="section" id="specialisms" aria-labelledby="spec-h">
+<section class="section wide" id="specialisms" aria-labelledby="spec-h">
   <div class="wrap">
-    <h2 id="spec-h">Specialisms</h2>
-    <div>
-      <ul class="practice">
-        <li><h3>Criminal Law</h3><p>Bail, trial, appeals and revisions, from the trial court to the Supreme Court.</p></li>
-        <li><h3>Corporate</h3><p>Company and LLP incorporation, corporate compliance, commercial contracts and corporate disputes.</p></li>
-        <li><h3>Family Law</h3><p>Dissolution of marriage, dower and maintenance, custody and guardianship.</p></li>
-        <li><h3>Civil Law</h3><p>Civil suits, property and rent matters, injunctions and the execution of decrees.</p></li>
-        <li><h3>Constitutional Matters</h3><p>Constitutional petitions for the enforcement of fundamental rights and the review of public action.</p></li>
-        <li><h3>All other areas</h3><p>The firm accepts instructions across the full range of practice areas.</p></li>
-      </ul>
-      <div class="more"><a href="practice">More on each practice area</a></div>
+    <div class="section-head">
+      <h2 id="spec-h">Specialisms</h2>
+      <a class="arrow" href="practice">Practice and services</a>
     </div>
+    <ul class="cards">
+      <li><a href="practice#criminal-law"><h3>Criminal Law</h3><p>Bail, trial, appeals and revisions, from the trial court to the Supreme Court.</p><span class="go" aria-hidden="true"></span></a></li>
+      <li><a href="practice#corporate"><h3>Corporate</h3><p>Company and LLP incorporation, corporate compliance, commercial contracts and corporate disputes.</p><span class="go" aria-hidden="true"></span></a></li>
+      <li><a href="practice#family-law"><h3>Family Law</h3><p>Dissolution of marriage, dower and maintenance, custody and guardianship.</p><span class="go" aria-hidden="true"></span></a></li>
+      <li><a href="practice#civil-law"><h3>Civil Law</h3><p>Civil suits, property and rent matters, injunctions and the execution of decrees.</p><span class="go" aria-hidden="true"></span></a></li>
+      <li><a href="practice#constitutional-matters"><h3>Constitutional Matters</h3><p>Constitutional petitions for the enforcement of fundamental rights and the review of public action.</p><span class="go" aria-hidden="true"></span></a></li>
+      <li><a href="practice#other-areas"><h3>All other areas</h3><p>The firm accepts instructions across the full range of practice areas.</p><span class="go" aria-hidden="true"></span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section wide" id="partners" aria-labelledby="lead-h">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="lead-h">Partners</h2>
+      <a class="arrow" href="team">The team</a>
+    </div>
+    <ul class="leaders">
+        <li><a href="team#partners"><picture><source srcset="img/team/naseer-ahmad-thaheem.webp" type="image/webp"><img src="img/team/naseer-ahmad-thaheem.png" width="600" height="626" alt="" loading="lazy"></picture><span><span class="role">Managing Partner</span><span class="name">Naseer Ahmad Thaheem</span></span></a></li>
+        <li><a href="team#partners"><picture><source srcset="img/team/mehr-zamir-hussain-sandhal.webp" type="image/webp"><img src="img/team/mehr-zamir-hussain-sandhal.png" width="600" height="626" alt="" loading="lazy"></picture><span><span class="role">Senior Partner</span><span class="name">Mehr Zamir Hussain Sandhal</span></span></a></li>
+        <li><a href="team#partners"><picture><source srcset="img/team/ghalib-naseer.webp" type="image/webp"><img src="img/team/ghalib-naseer.png" width="600" height="626" alt="" loading="lazy"></picture><span><span class="role">Partner</span><span class="name">Ghalib Naseer</span></span></a></li>
+    </ul>
   </div>
 </section>
 
@@ -166,13 +184,38 @@
   </div>
 </section>
 <footer class="site">
-  <div class="wrap">
-    <span>© 2026 FLC &amp; Associates LLP. All rights reserved.</span>
-    <nav aria-label="Legal">
-      <a href="legal-notice">Legal notice</a>
-      <a href="privacy">Privacy notice</a>
-      <a href="case-law-database">Case Law Database (members)</a>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <a class="foot-logo" href="./"><img src="img/emblem-light-160.png" width="160" height="137" alt="" loading="lazy"><span>FLC &amp; Associates LLP</span></a>
+      <p class="foot-tag">Barristers, Lawyers &amp; Consultants</p>
+      <p class="foot-contact"><a href="mailto:info@flcassociates.com">info@flcassociates.com</a><br><a href="tel:+923071114701">+92 307 1114701</a></p>
+    </div>
+    <div class="foot-offices">
+      <p class="foot-h">Offices</p>
+      <ul>
+        <li><span>Head Office, Multan</span>Ali Street, New North Gulgasht Colony, Multan</li>
+        <li><span>Multan Courts</span>4-Bashir Khan Block, District and Sessions Courts, Multan</li>
+        <li><span>Lahore</span>3rd Floor, Al-Ghaffar Law Building, 7-Turner Road, Lahore</li>
+        <li><span>Rawalpindi</span>Hamza Plaza, Awan Market, Rawalpindi</li>
+      </ul>
+    </div>
+    <nav class="foot-links" aria-label="Footer">
+      <p class="foot-h">The firm</p>
+      <a href="./">The Firm</a>
+      <a href="practice">Practice</a>
+      <a href="team">Team</a>
+      <a href="contact">Contact</a>
     </nav>
+  </div>
+  <div class="foot-base">
+    <div class="wrap">
+      <span>© 2026 FLC &amp; Associates LLP. All rights reserved.</span>
+      <nav aria-label="Legal">
+        <a href="legal-notice">Legal notice</a>
+        <a href="privacy">Privacy notice</a>
+        <a href="case-law-database">Case Law Database (members)</a>
+      </nav>
+    </div>
   </div>
 </footer>
 </body>

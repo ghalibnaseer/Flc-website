@@ -20,6 +20,7 @@ UPDATED = "13 November 2026"
 # Version tag on the stylesheet link: changes whenever site.css changes, so browsers
 # fetch the new styles at once instead of using a cached copy.
 CSS_VERSION = hashlib.sha256((OUT / "site.css").read_bytes()).hexdigest()[:10]
+JS_VERSION = hashlib.sha256((OUT / "site.js").read_bytes()).hexdigest()[:10]
 
 OFFICES = [
     ("Head Office, Multan", "Ali Street, New North Gulgasht Colony, Multan"),
@@ -59,6 +60,8 @@ def head(title, description, path):
 <link rel="preload" href="fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/libre-caslon-text-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="site.css?v={CSS_VERSION}">
+<script>document.documentElement.className = "js";</script>
+<script src="site.js?v={JS_VERSION}" defer></script>
 """
 
 
@@ -68,14 +71,15 @@ def topbar(current):
         cur = ' aria-current="page"' if href == current or (href == "./" and current == "index.html") else ""
         links.append(f'      <a href="{href}"{cur}>{label}</a>')
     cur = ' aria-current="page"' if current == "case-law-database.html" else ""
-    links.append(f'      <a class="members" href="case-law-database.html"{cur}><span class="m-hide">Case Law </span>Database</a>')
+    links.append(f'      <a class="members" href="case-law-database.html"{cur}>Case Law Database</a>')
     nav = "\n".join(links)
     return f"""<body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="topbar">
   <div class="wrap">
-    <a class="brand" href="./"><img src="img/emblem-480.png" width="480" height="410" alt=""><span>FLC &amp; Associates LLP</span></a>
-    <nav class="nav" aria-label="Site">
+    <a class="brand" href="./"><img src="img/emblem-160.png" width="160" height="137" alt=""><span>FLC &amp; Associates LLP</span></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span></button>
+    <nav class="nav" id="site-nav" aria-label="Site">
 {nav}
     </nav>
   </div>
@@ -113,14 +117,37 @@ def contact_band(note="For enquiries about instructing the firm, write to us or 
 
 def footer():
     year = UPDATED_ISO[:4]
+    offices = "\n".join(f'        <li><span>{w}</span>{a}</li>' for w, a in OFFICES)
     return f"""<footer class="site">
-  <div class="wrap">
-    <span>© {year} FLC &amp; Associates LLP. All rights reserved.</span>
-    <nav aria-label="Legal">
-      <a href="legal-notice.html">Legal notice</a>
-      <a href="privacy.html">Privacy notice</a>
-      <a href="case-law-database.html">Case Law Database (members)</a>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <a class="foot-logo" href="./"><img src="img/emblem-light-160.png" width="160" height="137" alt="" loading="lazy"><span>FLC &amp; Associates LLP</span></a>
+      <p class="foot-tag">Barristers, Lawyers &amp; Consultants</p>
+      <p class="foot-contact"><a href="mailto:{EMAIL}">{EMAIL}</a><br><a href="tel:+923071114701">+92 307 1114701</a></p>
+    </div>
+    <div class="foot-offices">
+      <p class="foot-h">Offices</p>
+      <ul>
+{offices}
+      </ul>
+    </div>
+    <nav class="foot-links" aria-label="Footer">
+      <p class="foot-h">The firm</p>
+      <a href="./">The Firm</a>
+      <a href="practice.html">Practice</a>
+      <a href="team.html">Team</a>
+      <a href="contact.html">Contact</a>
     </nav>
+  </div>
+  <div class="foot-base">
+    <div class="wrap">
+      <span>© {year} FLC &amp; Associates LLP. All rights reserved.</span>
+      <nav aria-label="Legal">
+        <a href="legal-notice.html">Legal notice</a>
+        <a href="privacy.html">Privacy notice</a>
+        <a href="case-law-database.html">Case Law Database (members)</a>
+      </nav>
+    </div>
   </div>
 </footer>
 """
@@ -186,23 +213,36 @@ ORG_JSONLD = """<script type="application/ld+json">
 </script>
 """
 
+def leader(role, name, slug):
+    return (f'        <li><a href="team.html#partners"><picture><source srcset="img/team/{slug}.webp" type="image/webp">'
+            f'<img src="img/team/{slug}.png" width="600" height="626" alt="" loading="lazy"></picture>'
+            f'<span><span class="role">{role}</span><span class="name">{name}</span></span></a></li>')
+
+leaders = "\n".join([
+    leader("Managing Partner", "Naseer Ahmad Thaheem", "naseer-ahmad-thaheem"),
+    leader("Senior Partner", "Mehr Zamir Hussain Sandhal", "mehr-zamir-hussain-sandhal"),
+    leader("Partner", "Ghalib Naseer", "ghalib-naseer"),
+])
+
 home = f"""<section class="firm-hero" aria-label="Introduction">
   <div class="wrap">
-    <div>
-      <p class="eyebrow">Barristers, Lawyers &amp; Consultants</p>
-      <h1>FLC &amp; Associates LLP</h1>
-      <p class="lede">A law firm practising across Pakistan since 1996, with offices in Multan, Lahore and Rawalpindi.</p>
-      <div class="facts">
-        <p><b>1996</b>Established</p>
-        <p><b>4</b>Offices in three cities</p>
-        <p><b>30,000+</b>Cases handled</p>
-      </div>
-      <div class="actions">
-        <a class="btn btn-solid" href="practice.html">Practice areas</a>
-        <a class="btn" href="contact.html">Contact the firm</a>
-      </div>
+    <img class="hero-mark" src="img/emblem-480.png" width="480" height="410" alt="" aria-hidden="true">
+    <p class="eyebrow">Barristers, Lawyers &amp; Consultants</p>
+    <h1>FLC &amp; Associates LLP</h1>
+    <p class="lede">A law firm practising across Pakistan since 1996, with offices in Multan, Lahore and Rawalpindi.</p>
+    <div class="actions">
+      <a class="btn btn-solid" href="practice.html">Practice areas</a>
+      <a class="btn" href="contact.html">Contact the firm</a>
     </div>
-    <img class="emblem" src="img/emblem-480.png" width="480" height="410" alt="FLC &amp; Associates LLP emblem: the figure of Justice within a laurel wreath">
+  </div>
+</section>
+
+<section class="figures" aria-label="The firm in figures">
+  <div class="wrap">
+    <p><b>1996</b>Established</p>
+    <p><b>4</b>Offices in three cities</p>
+    <p><b>30,000+</b>Cases handled</p>
+    <p><b>40+</b>Cities with associated advocates</p>
   </div>
 </section>
 
@@ -213,25 +253,36 @@ home = f"""<section class="firm-hero" aria-label="Introduction">
       <p class="lead">FLC &amp; Associates LLP was established in 1996 and has handled more than 30,000 cases over three decades. It practises from four offices in Multan, Lahore and Rawalpindi, and through associated advocates in more than 40 cities across Pakistan.</p>
       <p>The firm practises in all areas of law, with particular depth in criminal, corporate, family, civil and constitutional matters. It advises clients, conducts litigation before courts and tribunals throughout Pakistan, acts as in-house counsel for businesses and organisations, and has a dedicated mediation team.</p>
       <p>The firm appears before every judicial forum in the country, from the District and Sessions Courts to the High Courts, the Federal Constitutional Court and the Supreme Court of Pakistan.</p>
-      <div class="more"><a href="practice.html">Practice and services</a><a href="team.html">The team</a></div>
     </div>
   </div>
 </section>
 
-<section class="section" id="specialisms" aria-labelledby="spec-h">
+<section class="section wide" id="specialisms" aria-labelledby="spec-h">
   <div class="wrap">
-    <h2 id="spec-h">Specialisms</h2>
-    <div>
-      <ul class="practice">
-        <li><h3>Criminal Law</h3><p>Bail, trial, appeals and revisions, from the trial court to the Supreme Court.</p></li>
-        <li><h3>Corporate</h3><p>Company and LLP incorporation, corporate compliance, commercial contracts and corporate disputes.</p></li>
-        <li><h3>Family Law</h3><p>Dissolution of marriage, dower and maintenance, custody and guardianship.</p></li>
-        <li><h3>Civil Law</h3><p>Civil suits, property and rent matters, injunctions and the execution of decrees.</p></li>
-        <li><h3>Constitutional Matters</h3><p>Constitutional petitions for the enforcement of fundamental rights and the review of public action.</p></li>
-        <li><h3>All other areas</h3><p>The firm accepts instructions across the full range of practice areas.</p></li>
-      </ul>
-      <div class="more"><a href="practice.html">More on each practice area</a></div>
+    <div class="section-head">
+      <h2 id="spec-h">Specialisms</h2>
+      <a class="arrow" href="practice.html">Practice and services</a>
     </div>
+    <ul class="cards">
+      <li><a href="practice.html#criminal-law"><h3>Criminal Law</h3><p>Bail, trial, appeals and revisions, from the trial court to the Supreme Court.</p><span class="go" aria-hidden="true"></span></a></li>
+      <li><a href="practice.html#corporate"><h3>Corporate</h3><p>Company and LLP incorporation, corporate compliance, commercial contracts and corporate disputes.</p><span class="go" aria-hidden="true"></span></a></li>
+      <li><a href="practice.html#family-law"><h3>Family Law</h3><p>Dissolution of marriage, dower and maintenance, custody and guardianship.</p><span class="go" aria-hidden="true"></span></a></li>
+      <li><a href="practice.html#civil-law"><h3>Civil Law</h3><p>Civil suits, property and rent matters, injunctions and the execution of decrees.</p><span class="go" aria-hidden="true"></span></a></li>
+      <li><a href="practice.html#constitutional-matters"><h3>Constitutional Matters</h3><p>Constitutional petitions for the enforcement of fundamental rights and the review of public action.</p><span class="go" aria-hidden="true"></span></a></li>
+      <li><a href="practice.html#other-areas"><h3>All other areas</h3><p>The firm accepts instructions across the full range of practice areas.</p><span class="go" aria-hidden="true"></span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section wide" id="partners" aria-labelledby="lead-h">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="lead-h">Partners</h2>
+      <a class="arrow" href="team.html">The team</a>
+    </div>
+    <ul class="leaders">
+{leaders}
+    </ul>
   </div>
 </section>
 
@@ -271,12 +322,12 @@ practice = """<section class="page-head" aria-labelledby="ph">
     <h2 id="areas-h">Specialisms</h2>
     <div>
       <ul class="practice">
-        <li><h3>Criminal Law</h3><p>Pre-arrest and post-arrest bail, trials, appeals and revisions, quashment proceedings and private complaints, for complainants and for accused persons, at every stage from the trial court to the Supreme Court of Pakistan.</p></li>
-        <li><h3>Corporate</h3><p>Incorporation of companies and limited liability partnerships, corporate and regulatory compliance and filings with the Securities and Exchange Commission of Pakistan, drafting and review of commercial contracts, and corporate and commercial disputes.</p></li>
-        <li><h3>Family Law</h3><p>Dissolution of marriage, dower and maintenance, recovery of dowry articles, and custody and guardianship of minors, before the Family Courts and in appeal and constitutional proceedings.</p></li>
-        <li><h3>Civil Law</h3><p>Suits for declaration, possession, specific performance and recovery, property and rent matters, temporary and permanent injunctions, and the execution of decrees.</p></li>
-        <li><h3>Constitutional Matters</h3><p>Constitutional petitions for the enforcement of fundamental rights and against unlawful action by public bodies, and related appeals, before the High Courts and the Federal Constitutional Court.</p></li>
-        <li><h3>All other areas</h3><p>Matters outside the specialist fields, including tax, service and banking matters, are handled by the firm or with counsel it instructs.</p></li>
+        <li id="criminal-law"><h3>Criminal Law</h3><p>Pre-arrest and post-arrest bail, trials, appeals and revisions, quashment proceedings and private complaints, for complainants and for accused persons, at every stage from the trial court to the Supreme Court of Pakistan.</p></li>
+        <li id="corporate"><h3>Corporate</h3><p>Incorporation of companies and limited liability partnerships, corporate and regulatory compliance and filings with the Securities and Exchange Commission of Pakistan, drafting and review of commercial contracts, and corporate and commercial disputes.</p></li>
+        <li id="family-law"><h3>Family Law</h3><p>Dissolution of marriage, dower and maintenance, recovery of dowry articles, and custody and guardianship of minors, before the Family Courts and in appeal and constitutional proceedings.</p></li>
+        <li id="civil-law"><h3>Civil Law</h3><p>Suits for declaration, possession, specific performance and recovery, property and rent matters, temporary and permanent injunctions, and the execution of decrees.</p></li>
+        <li id="constitutional-matters"><h3>Constitutional Matters</h3><p>Constitutional petitions for the enforcement of fundamental rights and against unlawful action by public bodies, and related appeals, before the High Courts and the Federal Constitutional Court.</p></li>
+        <li id="other-areas"><h3>All other areas</h3><p>Matters outside the specialist fields, including tax, service and banking matters, are handled by the firm or with counsel it instructs.</p></li>
       </ul>
     </div>
   </div>
@@ -386,7 +437,7 @@ adv = [e for u, e, d, n in NAMES if d == ADV and e not in profiled]
 def namelist(items):
     return "\n".join(f"        <li>{x}</li>" for x in items)
 
-asc_block = (f"""      <h3 class="list-head">Advocates Supreme Court</h3>
+asc_block = (f"""      <h3 class="list-head">Advocates Supreme Court <span class="count">{len(asc)}</span></h3>
       <ul class="names">
 {namelist(asc)}
       </ul>
@@ -421,11 +472,11 @@ team = f"""<section class="page-head" aria-labelledby="th">
   <div class="wrap">
     <h2 id="adv-h">Advocates</h2>
     <div>
-{asc_block}      <h3 class="list-head">Advocates High Court</h3>
+{asc_block}      <h3 class="list-head">Advocates High Court <span class="count">{len(ahc)}</span></h3>
       <ul class="names">
 {namelist(ahc)}
       </ul>
-      <h3 class="list-head">Advocates</h3>
+      <h3 class="list-head">Advocates <span class="count">{len(adv)}</span></h3>
       <ul class="names">
 {namelist(adv)}
       </ul>
@@ -437,8 +488,10 @@ team = f"""<section class="page-head" aria-labelledby="th">
   <div class="wrap">
     <h2 id="regional-h">Our Regional Partners</h2>
     <div class="regional">
-      <a class="firm-logo" href="https://hslegal.org" target="_blank" rel="noopener" aria-label="HS Legal LLP (opens in a new tab)"><img src="img/partners/hs-legal-logo.png" width="896" height="192" alt="HS Legal LLP logo"></a>
-      <h3 class="firm-name"><a href="https://hslegal.org" target="_blank" rel="noopener">HS Legal LLP</a></h3>
+      <div class="firm-card">
+        <a class="firm-logo" href="https://hslegal.org" target="_blank" rel="noopener" aria-label="HS Legal LLP (opens in a new tab)"><picture><source srcset="img/partners/hs-legal-logo.webp" type="image/webp"><img src="img/partners/hs-legal-logo.png" width="896" height="192" alt="HS Legal LLP" loading="lazy"></picture></a>
+        <a class="arrow" href="https://hslegal.org" target="_blank" rel="noopener">hslegal.org</a>
+      </div>
       <ul class="team">
 {regional}
       </ul>
