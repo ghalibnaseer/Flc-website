@@ -599,6 +599,77 @@ for f, sid in [("career.html", "appointments"), ("career.html", "advocacy"), ("c
                ("publications.html", "publications"), ("commentary.html", "commentary")]:
     blocks.append(section_block(f, sid))
 
+# The firm page omits some portfolio content (partner's instructions, 15 Nov 2026).
+# The personal portfolio keeps it. Each edit must match exactly once, so a change
+# in the portfolio wording stops the build instead of letting the content through.
+FIRM_PROFILE_REPLACE = [
+    # practice areas added to the opening paragraph
+    ("Head of Moot Courts and Advocacy Initiatives at The Millennium Universal College (TMUC), Multan.</p>",
+     "Head of Moot Courts and Advocacy Initiatives at The Millennium Universal College (TMUC), Multan. "
+     "His primary practice areas are criminal, family and corporate law.</p>"),
+    # TILS removed from the profile text
+    (", and was the first student across The Institute of Legal Studies (TILS) campuses to be appointed Research Fellow, "
+     "where he revived the <i>TILS Law Review</i> after ten years.</p>", ".</p>"),
+    # Spark of Hope removed from the profile text
+    (" He co-founded Spark of Hope, a student-led relief initiative that began after the 2022 floods.</p>", "</p>"),
+    # practice areas panel ahead of research interests
+    ('<div class="panel">\n            <p class="panel-title">Research interests</p>',
+     '<div class="panel">\n            <p class="panel-title">Practice areas</p>\n            <ul class="areas">\n'
+     '              <li>Criminal law</li>\n              <li>Family law</li>\n              <li>Corporate law</li>\n'
+     '            </ul>\n          </div>\n          <div class="panel">\n            <p class="panel-title">Research interests</p>'),
+    # degree classification, Middle Temple and Copenhagen removed from credentials
+    ("LLB (Hons), Upper Second Class<small>", "LLB (Hons)<small>"),
+    ('<dd>The Honourable Society of the Middle Temple</dd><dd style="margin-top:0.45rem">Punjab Bar Council', "<dd>Punjab Bar Council"),
+    ("<div><dt>Further study</dt><dd>Constitutional Struggles in the Muslim World<small>University of Copenhagen, 2024</small></dd></div>", ""),
+]
+FIRM_PROFILE_REMOVE_P = [
+    '<p class="earlier"><b>Earlier at the firm:</b>',
+    '<p class="earlier"><b>April 2025:</b> Head of Protocols',
+]
+FIRM_PROFILE_REMOVE_LI = [
+    "<h4>Student Ambassador</h4>",
+    "Spark of Hope, Lahore",
+    "<h4>Teaching Assistant, Public Law;",
+    "The Institute of Legal Studies (TILS), Lahore</p>",
+    "Law Office of Mirza Aziz Akbar Baig",
+    "3rd National TILS Lahore Law Moot Court Competition",
+    "2nd Intra TILS Lahore Law Moot Court Competition",
+    "<strong>Awards of Excellence, The Institute of Legal Studies (TILS), Lahore</strong>",
+    "<strong>Certificate of Excellence in Reviewing,",
+    "<strong>Awards of Appreciation,",
+    "<strong>Certificates of Honour and Appreciation,",
+    "<h4>Sovereignty Beyond Earth in Equitable Space Resource Regimes</h4>",
+    "<h4>The Cost of Injustice:",
+    "<h4>Combating Discrimination, Violence and Harmful Practices against Intersex Persons</h4>",
+    "Submitted by the TILS Law Review Society",
+]
+
+def _cut(html, marker, open_tag, close_tag):
+    i = html.find(marker)
+    if i < 0 or html.find(marker, i + 1) >= 0:
+        raise SystemExit(f"firm profile edit: marker not found exactly once: {marker!r}")
+    start = html.rfind(open_tag, 0, i)
+    end = html.find(close_tag, i) + len(close_tag)
+    line_start = html.rfind("\n", 0, start)
+    if html[line_start + 1:start].strip() == "":
+        start = line_start
+    return html[:start] + html[end:]
+
+def firm_profile(html):
+    for old, new in FIRM_PROFILE_REPLACE:
+        if html.count(old) != 1:
+            raise SystemExit(f"firm profile edit: text not found exactly once: {old[:70]!r}")
+        html = html.replace(old, new)
+    for m in FIRM_PROFILE_REMOVE_P:
+        html = _cut(html, m, "<p", "</p>")
+    for m in FIRM_PROFILE_REMOVE_LI:
+        html = _cut(html, m, "<li>", "</li>")
+    if "TILS" in html or "Spark of Hope" in html or "Middle Temple" in html:
+        raise SystemExit("firm profile edit: removed content still present")
+    return html
+
+blocks = [firm_profile("\n".join(blocks))]
+
 profile_hero = """<p class="crumb wrap"><a href="team.html">Team</a> / Ghalib Naseer</p>
 <section class="hero" id="top" aria-label="Introduction">
   <div class="wrap">
