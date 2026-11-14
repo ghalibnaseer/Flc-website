@@ -187,7 +187,7 @@ home = f"""<section class="firm-hero" aria-label="Introduction">
       <div class="facts">
         <p><b>1996</b>Established</p>
         <p><b>4</b>Offices in three cities</p>
-        <p><b>LLP</b>Registered with the SECP</p>
+        <p><b>30,000+</b>Cases handled</p>
       </div>
       <div class="actions">
         <a class="btn btn-solid" href="practice.html">Practice areas</a>
@@ -202,7 +202,7 @@ home = f"""<section class="firm-hero" aria-label="Introduction">
   <div class="wrap">
     <h2 id="firm-h">The Firm</h2>
     <div class="prose">
-      <p class="lead">FLC &amp; Associates LLP was established in 1996 and is a limited liability partnership registered with the Securities and Exchange Commission of Pakistan.</p>
+      <p class="lead">FLC &amp; Associates LLP was established in 1996 and has handled more than 30,000 cases over three decades. It practises from four offices in Multan, Lahore and Rawalpindi, and through associated advocates in more than 40 cities across Pakistan.</p>
       <p>The firm practises in all areas of law, with particular depth in criminal, corporate, family, civil and constitutional matters. It advises clients, conducts litigation before courts and tribunals throughout Pakistan, acts as in-house counsel for businesses and organisations, and has a dedicated mediation team.</p>
       <p>The firm appears before every judicial forum in the country, from the District and Sessions Courts to the High Courts, the Federal Constitutional Court and the Supreme Court of Pakistan.</p>
       <div class="more"><a href="practice.html">Practice and services</a><a href="team.html">The team</a></div>
