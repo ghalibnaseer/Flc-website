@@ -2,6 +2,7 @@
 
 Usage: python3 build.py <portfolio_dir> <out_dir>
 """
+import hashlib
 import re
 import sys
 
@@ -15,6 +16,10 @@ MEMBERS_URL = "https://caselawdatabase.flcassociates.com/"
 EMAIL = "info@flcassociates.com"
 UPDATED_ISO = "2026-11-13"
 UPDATED = "13 November 2026"
+
+# Version tag on the stylesheet link: changes whenever site.css changes, so browsers
+# fetch the new styles at once instead of using a cached copy.
+CSS_VERSION = hashlib.sha256((OUT / "site.css").read_bytes()).hexdigest()[:10]
 
 OFFICES = [
     ("Head Office, Multan", "Ali Street, New North Gulgasht Colony, Multan"),
@@ -53,7 +58,7 @@ def head(title, description, path):
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="preload" href="fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/libre-caslon-text-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="site.css?v={CSS_VERSION}">
 """
 
 
