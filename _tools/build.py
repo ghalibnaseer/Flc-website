@@ -3,6 +3,7 @@
 Usage: python3 build.py <portfolio_dir> <out_dir>
 """
 import hashlib
+import os
 import re
 import sys
 
@@ -825,10 +826,38 @@ page("ghalib-naseer.html", "Ghalib Naseer",
 
 # ---------------------------------------------------------------- robots, sitemap, 404, CNAME
 (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n")
+# Each page's lastmod is the date its content last changed. The build keeps a fingerprint of every
+# page in _tools/sitemap-dates.json; when a page's fingerprint changes, its date becomes today
+# (Pakistan time). A page with no record yet takes the date of its last commit.
+import json, subprocess
+from datetime import datetime, timedelta, timezone
 urls = ["", "practice", "team", "ghalib-naseer", "contact", "legal-notice", "privacy"]
+dates_file = OUT / "_tools" / "sitemap-dates.json"
+try:
+    known = json.loads(dates_file.read_text())
+except (OSError, ValueError):
+    known = {}
+today = (datetime.now(timezone.utc) + timedelta(hours=5)).strftime("%Y-%m-%d")
+lastmod = {}
+for u in urls:
+    f = OUT / ((u or "index") + ".html")
+    fp = hashlib.sha256(f.read_bytes()).hexdigest()[:16]
+    rec = known.get(u)
+    if rec and rec["sha"] == fp:
+        lastmod[u] = rec["date"]
+    elif rec:
+        lastmod[u] = today
+    else:
+        try:
+            lastmod[u] = subprocess.run(["git", "-C", str(OUT), "log", "-1", "--date=format-local:%Y-%m-%d", "--format=%cd", "--", f.name],
+                                        capture_output=True, text=True, env={**os.environ, "TZ": "Asia/Karachi"}).stdout.strip() or today
+        except OSError:
+            lastmod[u] = today
+    known[u] = {"sha": fp, "date": lastmod[u]}
+dates_file.write_text(json.dumps(known, indent=1, sort_keys=True) + "\n")
 (OUT / "sitemap.xml").write_text(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    + "".join(f"  <url><loc>{SITE}/{u}</loc><lastmod>{UPDATED_ISO}</lastmod></url>\n" for u in urls)
+    + "".join(f"  <url><loc>{SITE}/{u}</loc><lastmod>{lastmod[u]}</lastmod></url>\n" for u in urls)
     + "</urlset>\n")
 page("404.html", "Page not found", "Page not found.",
      """<section class="page-head"><div class="wrap"><p class="eyebrow">404</p><h1>Page not found</h1>
