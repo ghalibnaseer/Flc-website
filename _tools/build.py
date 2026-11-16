@@ -395,7 +395,7 @@ def person(role, name, enrolment, bio="", photo=None, more=None):
           <div class="photo">{img}</div>
           <p class="role">{role}</p>
           <h3>{name}</h3>
-          <p class="quals">{enrolment}</p>{bio_html}{btn}
+          {f'<p class="quals">{enrolment}</p>' if enrolment else ''}{bio_html}{btn}
         </li>"""
 
 nat_bio = "Founded the firm in 1996. His practice is in criminal trials and litigation before the District and Sessions Courts, the High Courts and the Supreme Court of Pakistan, and he has conducted more than 10,000 cases."
@@ -428,9 +428,15 @@ associates = "\n".join([
            "More than ten years of legal experience.", photo="img/team/shoaib-ashraf"),
     person("Senior Associate, Tax and Corporate Compliance", "Naveed Sikander Bhatti", "Advocate High Court",
            "Leads the firm\u2019s tax and corporate compliance work.", photo="img/team/naveed-sikander-bhatti"),
+    # Added on the partner's instructions, 17 Nov 2026, in this order.
+    person("Associate", "Sadaqat Ali Vehniwal", "Advocate High Court", photo="img/team/sadaqat-ali-vehniwal"),
+    person("Associate", "Usama Noor Dehar", "Advocate", photo="img/team/usama-noor-dehar"),
+    person("Associate", "Arslan Iqbal Sumra", "Advocate", photo="img/team/arslan-iqbal-sumra"),
+    person("Chief Paralegal", "Waseem Sajjad Thaheem", "", "Ten years of experience.", photo="img/team/waseem-sajjad-thaheem"),
 ])
 profiled = {"Naseer Ahmad Thaheem", "Mehr Zamir Hussain Sandhal", "Malik Shafqat Raza Thaheem",
-            "Chaudhry Muhammad Shoaib Ashraf Arain", "Naveed Sikander Bhatti"}
+            "Chaudhry Muhammad Shoaib Ashraf Arain", "Naveed Sikander Bhatti",
+            "Sadaqat Ali Wahniwal", "Usama Noor Dehar", "Arslan Sumra"}   # now profiled above
 asc = [e for u, e, d, n in NAMES if d == ASC and e not in profiled]
 ahc = [e for u, e, d, n in NAMES if d == AHC and e not in profiled]
 adv = [e for u, e, d, n in NAMES if d == ADV and e not in profiled]
@@ -461,7 +467,7 @@ team = f"""<section class="page-head" aria-labelledby="th">
 
 <section class="section" id="associates" aria-labelledby="assoc-h">
   <div class="wrap">
-    <h2 id="assoc-h">Senior Associates</h2>
+    <h2 id="assoc-h">Associates</h2>
     <ul class="team">
 {associates}
     </ul>
