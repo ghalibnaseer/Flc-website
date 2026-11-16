@@ -430,9 +430,11 @@ associates = "\n".join([
            "Leads the firm\u2019s tax and corporate compliance work.", photo="img/team/naveed-sikander-bhatti"),
     # Added on the partner's instructions, 17 Nov 2026, in this order.
     person("Associate", "Sadaqat Ali Vehniwal", "Advocate High Court", photo="img/team/sadaqat-ali-vehniwal"),
-    person("Associate", "Usama Noor Dehar", "Advocate", photo="img/team/usama-noor-dehar"),
+    person("Associate", "Usama Noor Dehar", "Advocate",
+           "Bachelor\u2019s degree in Political Science, London School of Economics. LLB (Hons), University of London.",
+           photo="img/team/usama-noor-dehar"),
     person("Associate", "Arslan Iqbal Sumra", "Advocate", photo="img/team/arslan-iqbal-sumra"),
-    person("Chief Paralegal", "Waseem Sajjad Thaheem", "", "Ten years of experience.", photo="img/team/waseem-sajjad-thaheem"),
+    person("Chief Paralegal", "Waseem Sajjad Thaheem", "", photo="img/team/waseem-sajjad-thaheem"),
 ])
 profiled = {"Naseer Ahmad Thaheem", "Mehr Zamir Hussain Sandhal", "Malik Shafqat Raza Thaheem",
             "Chaudhry Muhammad Shoaib Ashraf Arain", "Naveed Sikander Bhatti",
