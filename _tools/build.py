@@ -434,6 +434,7 @@ associates = "\n".join([
     person("Associate", "Ghulam Murtaza Khokhar", "Advocate",
            "LLB (Hons), University of London. Three years of experience.",
            photo="img/team/ghulam-murtaza-khokhar"),
+    person("Associate", "Mehr Mujahid Ali Sial", "Advocate", photo="img/team/mehr-mujahid-ali-sial"),
     person("Associate", "Usama Noor Dehar", "Advocate",
            "Bachelor\u2019s degree in Political Science, LSE. LLB (Hons), University of London.",
            photo="img/team/usama-noor-dehar"),
@@ -442,7 +443,7 @@ associates = "\n".join([
 ])
 profiled = {"Naseer Ahmad Thaheem", "Mehr Zamir Hussain Sandhal", "Malik Shafqat Raza Thaheem",
             "Chaudhry Muhammad Shoaib Ashraf Arain", "Naveed Sikander Bhatti",
-            "Sadaqat Ali Wahniwal", "Usama Noor Dehar", "Arslan Sumra"}   # now profiled above
+            "Sadaqat Ali Wahniwal", "Usama Noor Dehar", "Arslan Sumra", "Mehr Mujahid Ali Sial"}   # now profiled above
 asc = [e for u, e, d, n in NAMES if d == ASC and e not in profiled]
 ahc = [e for u, e, d, n in NAMES if d == AHC and e not in profiled]
 adv = [e for u, e, d, n in NAMES if d == ADV and e not in profiled]
